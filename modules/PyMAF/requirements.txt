@@ -1,7 +1,7 @@
 numpy
 scikit-image
 scipy
-sklearn
+scikit-learn
 smplx
 tqdm
 yacs
