@@ -11,10 +11,8 @@ import pickle
 from ..image import lmk2d_to_bbox
 import mmcv
 
-deca_exp_to_smplx_X = np.load(
-    osp.join(os.path.dirname(__file__),
-             '../../../data/flame2020to2019_exp_trafo.npy')
-)
+work_dir = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW'
+deca_exp_to_smplx_X = np.load(osp.join(work_dir, 'data/flame2020to2019_exp_trafo.npy'))
 
 
 def deca_exp_to_smplx(e_deca):

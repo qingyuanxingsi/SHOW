@@ -52,6 +52,7 @@ class FLAME(nn.Module):
     def __init__(self, config, optimize_basis=False):
         super(FLAME, self).__init__()
         loguru.logger.info("[FLAME] creating the FLAME Decoder")
+        config.flame_model_path = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/models/models_MICA/FLAME2020/generic_model.pkl'
         with open(config.flame_model_path, 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             flame_model = Struct(**ss)
@@ -91,6 +92,7 @@ class FLAME(nn.Module):
         self.register_parameter('neck_pose', nn.Parameter(default_neck_pose, requires_grad=False))
 
         # Static and Dynamic Landmark embeddings for FLAME
+        config.flame_lmk_embedding_path = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/models/models_MICA/FLAME2020/landmark_embedding.npy'
         lmk_embeddings = np.load(config.flame_lmk_embedding_path, allow_pickle=True, encoding='latin1')
         lmk_embeddings = lmk_embeddings[()]
         self.register_buffer('lmk_faces_idx', torch.from_numpy(lmk_embeddings['static_lmk_faces_idx']).long())

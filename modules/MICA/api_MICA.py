@@ -45,6 +45,7 @@ class api_MICA(object):
 
         self.app = FaceAnalysis(name='antelopev2', 
                                 providers=['CPUExecutionProvider'],
+                                root='/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/insightface'
                                 # providers=['CUDAExecutionProvider']
                                 )
         self.app.prepare(ctx_id=0, det_size=(224, 224))

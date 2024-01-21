@@ -10,8 +10,8 @@ from .builder import IDER
 from .base import ider_base
 from loguru import logger
 
-default_weight_path=os.path.join(os.path.dirname(__file__),
-                                     '../../../models/arcface/glink360k_cosface_r100_fp16_0.1.pth')
+work_dir = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW'
+default_weight_path=os.path.join(work_dir, 'models/arcface/glink360k_cosface_r100_fp16_0.1.pth')
 
 @IDER.register_module()
 class arcface_ider(ider_base):

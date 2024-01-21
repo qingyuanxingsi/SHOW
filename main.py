@@ -19,6 +19,7 @@
 import mmcv
 import argparse
 import os
+import sys
 import SHOW
 from stage1_main import SHOW_stage1
 from stage2_main import SHOW_stage2
@@ -87,6 +88,8 @@ def parse_overwrite_flag(over_write_cfg):
 
 
 if __name__ == '__main__':
+    os.environ['SHOW_DIR'] = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW'
+    sys.path.append('/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/mmpose')
     SHOW.utils.work_seek_init()
     SHOW.utils.platform_init()
 
