@@ -44,9 +44,10 @@ def api_multi_body(
     cudnn.benchmark = True
     torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.enabled = True
+    torch.cuda.empty_cache()
     print(f'results in {savefolder}')
 
-    posedata = TestData(imgfolder, iscrop=iscrop,body_detector='rcnn')
+    posedata = TestData(imgfolder, iscrop=iscrop, body_detector='rcnn')
     pixie_cfg.model.use_tex = False
     pixie = PIXIE(config=pixie_cfg, device=device)
     visualizer = Visualizer(

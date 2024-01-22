@@ -19,10 +19,11 @@ import argparse
 import os
 
 from yacs.config import CfgNode as CN
+from global_config import SHOW_MAIN_DIR
 
 cfg = CN()
 
-abs_mica_dir = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/models/models_MICA'
+abs_mica_dir = f'{SHOW_MAIN_DIR}/models/models_MICA'
 # abs_mica_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 cfg.mica_dir = abs_mica_dir
 cfg.device = 'cuda'

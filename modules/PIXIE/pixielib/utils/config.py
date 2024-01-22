@@ -2,6 +2,7 @@
 Default config for PIXIE
 '''
 from yacs.config import CfgNode as CN
+from global_config import SHOW_MAIN_DIR
 import argparse
 import yaml
 import os
@@ -12,8 +13,7 @@ cfg = CN()
 #       data-->
 #           deca_model.tar
 #           ......
-abs_pixie_dir = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '../../../../../models/models_pixie'))
+abs_pixie_dir = os.path.abspath(os.path.join(SHOW_MAIN_DIR, 'models/models_pixie'))
 cfg.pixie_dir = abs_pixie_dir
 cfg.device = 'cuda'
 cfg.device_id = '0'
@@ -33,7 +33,7 @@ cfg.params.hand_share_list = ['right_wrist_pose', 'right_hand_pose'] #only for r
 # ---------------------------------------------------------------------------- #
 cfg.model = CN()
 
-cfg.model.tex_path = os.path.join(cfg.pixie_dir, 'data', 'FLAME_albedo_from_BFM.npz')
+cfg.model.tex_path = os.path.join(SHOW_MAIN_DIR, 'data', 'FLAME_albedo_from_BFM.npz')
 cfg.model.smplx_model_path = os.path.join(cfg.pixie_dir, 'data', 'SMPLX_NEUTRAL_2020.npz')
 
 cfg.model.topology_path = os.path.join(cfg.pixie_dir, 'data', 'SMPL_X_template_FLAME_uv.obj') 
@@ -175,6 +175,7 @@ def get_cfg_defaults():
 
 def update_cfg(cfg, cfg_file):
     # cfg.merge_from_file(cfg_file, allow_unsafe=True)
+    print(f"[PIXIE]Config File:{cfg_file}")
     cfg.merge_from_file(cfg_file)
     return cfg.clone()
 

@@ -193,7 +193,6 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
     config.speaker_name = shape_id
     logger.info(f'shape_id/speaker_name: {shape_id}')
 
-    assets_root = r'/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/data'
     flame2020to2019_exp_trafo = './flame2020to2019_exp_trafo.npy'
     flame2020to2019_exp_trafo = os.path.abspath(
         os.path.join(assets_root, flame2020to2019_exp_trafo))

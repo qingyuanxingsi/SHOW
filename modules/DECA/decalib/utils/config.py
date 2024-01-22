@@ -5,6 +5,7 @@ from yacs.config import CfgNode as CN
 import argparse
 import yaml
 import os
+from global_config import SHOW_MAIN_DIR
 
 cfg = CN()
 
@@ -13,8 +14,7 @@ cfg = CN()
 #       data-->
 #           deca_model.tar
 #           ......
-abs_deca_dir = os.path.abspath(os.path.join(
-os.path.dirname(__file__), '../../../../../models/models_deca'))
+abs_deca_dir = os.path.abspath(os.path.join(SHOW_MAIN_DIR, 'models/models_deca'))
 # print(f'abs_deca_dir:{abs_deca_dir}')
 cfg.deca_dir = abs_deca_dir
 cfg.device = 'cuda'

@@ -9,9 +9,9 @@ from easydict import EasyDict
 from .builder import IDER
 from .base import ider_base
 from loguru import logger
+from global_config import SHOW_MAIN_DIR
 
-work_dir = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW'
-default_weight_path=os.path.join(work_dir, 'models/arcface/glink360k_cosface_r100_fp16_0.1.pth')
+default_weight_path=os.path.join(SHOW_MAIN_DIR, 'models/arcface/glink360k_cosface_r100_fp16_0.1.pth')
 
 @IDER.register_module()
 class arcface_ider(ider_base):
@@ -32,7 +32,7 @@ class arcface_ider(ider_base):
         if self.det == 'fan':
             import face_alignment
             self.fan = face_alignment.FaceAlignment(
-                face_alignment.LandmarksType._2D, 
+                face_alignment.LandmarksType.TWO_D, 
                 flip_input=False)
         if self.det == 'mtcnn':
             from facenet_pytorch import MTCNN as mtcnn

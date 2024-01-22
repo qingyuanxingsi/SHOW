@@ -27,6 +27,7 @@ from loguru import logger
 from pytorch3d.io import save_ply
 from skimage.io import imread
 from tqdm import tqdm
+from global_config import SHOW_MAIN_DIR
 
 from .micalib.config import get_cfg_defaults
 from .datasets.creation.util import get_arcface_input, get_center
@@ -45,7 +46,7 @@ class api_MICA(object):
 
         self.app = FaceAnalysis(name='antelopev2', 
                                 providers=['CPUExecutionProvider'],
-                                root='/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/insightface'
+                                root=f'{SHOW_MAIN_DIR}/insightface'
                                 # providers=['CUDAExecutionProvider']
                                 )
         self.app.prepare(ctx_id=0, det_size=(224, 224))

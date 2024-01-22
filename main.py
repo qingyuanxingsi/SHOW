@@ -26,6 +26,7 @@ from stage2_main import SHOW_stage2
 from configs.csv_parser import gen_path_from_ours_root
 from SHOW import attr_dict
 from pathlib import Path
+from global_config import SHOW_MAIN_DIR
 
 
 def cvt_cfg(val):

@@ -496,6 +496,7 @@ class PIXIE(object):
         Returns:
             predictions: smplx predictions
         '''
+        decode_device = "cuda"
         if 'jaw_pose' in param_dict.keys() and len(param_dict['jaw_pose'].shape) == 2:
             self.convert_pose(param_dict, param_type)
         elif param_dict['right_wrist_pose'].shape[-1] == 6:
@@ -577,7 +578,7 @@ class PIXIE(object):
         for key, value in param_dict.items():
             if key in ['global_pose', 'body_pose', 'jaw_pose', 'left_hand_pose', 'right_hand_pose']:
                 tmp = converter.batch_matrix2axis(value[0]).unsqueeze_(0)
-                param_dict_axis[key] = tmp.to('cuda')
+                param_dict_axis[key] = tmp.to(decode_device)
 
         # self.neutral_model=self.neutral_model.to('cuda')
         # model_output = self.neutral_model(
@@ -663,7 +664,7 @@ class PIXIE(object):
                              device=predicted_joints.device,
                              dtype=predicted_joints.dtype)],
                         dim=-1)
-                t = torch.bmm( r,tform_T)
+                t = torch.bmm(r, tform_T)
                 t=t[:,:,:2]
                 # out
                 loc_3d = joints.clone()
@@ -686,25 +687,25 @@ class PIXIE(object):
             # TODO 用perspective camera重新投影到原图的坐标
             predicted_landmarks = perspective_projection(
                 landmarks,
-                rotation=torch.eye(3, device='cuda').unsqueeze(
+                rotation=torch.eye(3, device=decode_device).unsqueeze(
                     0).expand(1, -1, -1),
                 translation=torch.tensor(
-                    [trans_cam], device='cuda', dtype=torch.float),
+                    [trans_cam], device=decode_device, dtype=torch.float),
                 camera_intrics=camera_intrics)[:, :, :-1]
 
             trans_verts = perspective_projection(
                 verts,
-                rotation=torch.eye(3, device='cuda').unsqueeze(
+                rotation=torch.eye(3, device=decode_device).unsqueeze(
                     0).expand(1, -1, -1),
                 translation=torch.tensor(
-                    [trans_cam], device='cuda', dtype=torch.float),
+                    [trans_cam], device=decode_device, dtype=torch.float),
                 camera_intrics=camera_intrics)
             predicted_joints = perspective_projection(
                 joints,
-                rotation=torch.eye(3, device='cuda').unsqueeze(
+                rotation=torch.eye(3, device=decode_device).unsqueeze(
                     0).expand(1, -1, -1),
                 translation=torch.tensor(
-                    [trans_cam], device='cuda', dtype=torch.float),
+                    [trans_cam], device=decode_device, dtype=torch.float),
                 camera_intrics=camera_intrics)[:, :, :-1]
 
             # TODO 将坐标转换到裁剪后的图片

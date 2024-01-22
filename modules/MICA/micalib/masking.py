@@ -48,8 +48,6 @@ import os
 class Masking(nn.Module):
     def __init__(self, config):
         super(Masking, self).__init__()
-        config.FLAME_masks = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/models/models_MICA/FLAME2020/FLAME_masks/FLAME_masks.pkl'
-        config.generic_model = '/mnt/chongqinggeminiceph1fs/geminicephfs/security-others-common/doodleliang/SHOW/models/models_MICA/FLAME2020/generic_model.pkl'
         with open(config.FLAME_masks, 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             self.masks = Struct(**ss)
