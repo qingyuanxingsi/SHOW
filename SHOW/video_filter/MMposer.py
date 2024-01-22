@@ -1,4 +1,5 @@
 import cv2
+from global_config import SHOW_MAIN_DIR
 
 
 class MMPoseAnalyzer():
@@ -11,8 +12,8 @@ class MMPoseAnalyzer():
         pose_config = os.path.join(mmpose_root,'configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/hrnet_w48_coco_256x192.py')
         det_config = os.path.join(mmpose_root,'demo/mmdetection_cfg/faster_rcnn_r50_fpn_coco.py')
         
-        pose_checkpoint = 'https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w48_coco_256x192-b9e0b3ab_20200708.pth'
-        det_checkpoint = 'https://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_1x_coco/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth'
+        pose_checkpoint = f'{SHOW_MAIN_DIR}/models/mmpose/hrnet_w48_coco_256x192-b9e0b3ab_20200708.pth'
+        det_checkpoint = f'{SHOW_MAIN_DIR}/models/mmpose/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth'
 
         self.pose_model = init_pose_model(pose_config, pose_checkpoint)
         self.det_model = init_detector(det_config, det_checkpoint)

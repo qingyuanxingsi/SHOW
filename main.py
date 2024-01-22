@@ -91,6 +91,7 @@ def parse_overwrite_flag(over_write_cfg):
 if __name__ == '__main__':
     mmpose_dir = os.path.join(os.path.dirname(SHOW_MAIN_DIR), 'mmpose')
     print(f"mmpose dir:{mmpose_dir}")
+    os.environ['mmpose_root'] = mmpose_dir
     sys.path.append(mmpose_dir)
     SHOW.utils.work_seek_init()
     SHOW.utils.platform_init()
