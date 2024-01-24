@@ -20,6 +20,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import os
 from pytorch3d.io import load_obj
 from pytorch3d.structures import Meshes
 from skimage.io import imread
@@ -67,8 +68,9 @@ class Renderer(nn.Module):
         uvcoords = aux.verts_uvs[None, ...]  # (N, V, 2)
         uvfaces = faces.textures_idx[None, ...]  # (N, F, 3)
         faces = faces.verts_idx[None, ...]
+        main_dir = os.environ['main_dir']
 
-        mask = torch.from_numpy(imread(parse_abs_path(__file__,'../../data/uv_mask_eyes.jpg')) / 255.).permute(2, 0, 1).cuda()[0:3, :, :]
+        mask = torch.from_numpy((imread(f'{main_dir}/data/uv_mask_eyes.jpg')) / 255.).permute(2, 0, 1).cuda()[0:3, :, :]
         mask = mask > 0.
         mask = F.interpolate(mask[None].float(), [uv_size, uv_size], mode='bilinear')
         self.register_buffer('mask', mask)

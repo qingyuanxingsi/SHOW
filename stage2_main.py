@@ -76,6 +76,7 @@ from SHOW.save_tracker import save_tracker
 from SHOW.utils import is_valid_json
 from configs.cfg_ins import condor_cfg
 
+main_dir = os.path.dirname(os.path.abspath(__file__))
 
 @logger.catch
 def SHOW_stage2(*args, **kwargs):
@@ -151,7 +152,7 @@ def SHOW_stage2(*args, **kwargs):
         person_face_emb = assets.person_face_emb
         face_detector_mediapipe = FaceDetector('google', device=device)
         face_detector = face_alignment.FaceAlignment(
-            face_alignment.LandmarksType._2D, device=device)
+            face_alignment.LandmarksType.TWO_D, device=device)
 
         body_model = load_smplx_model(dtype=dtype, **tracker_cfg.smplx_cfg)
         body_params_dict = load_save_pkl(tracker_cfg.ours_pkl_file_path,
@@ -177,8 +178,7 @@ def SHOW_stage2(*args, **kwargs):
         op = op_base()
         smplx2flame_idx = assets.smplx2flame_idx
 
-        mesh_file = Path(__file__).parent.joinpath(
-            '../data/head_template_mesh.obj')
+        mesh_file = f'{main_dir}/data/head_template_mesh.obj'
 
         diff_renderer = Renderer(torch.Tensor([[512, 512]]),
                                  obj_filename=mesh_file)

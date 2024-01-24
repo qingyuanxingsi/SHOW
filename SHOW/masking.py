@@ -26,6 +26,9 @@ import trimesh
 from trimesh import Trimesh
 import mmcv
 from .utils.paths import parse_abs_path
+from global_config import SHOW_MAIN_DIR
+
+main_dir = SHOW_MAIN_DIR
 
 def to_tensor(array, dtype=torch.float32):
     if 'torch.tensor' not in str(type(array)):
@@ -48,15 +51,15 @@ class Masking(nn.Module):
     def __init__(self):
         dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
         super(Masking, self).__init__()
-        with open(f'{dir}/../data/FLAME_masks.pkl', 'rb') as f:
+        with open(f'{main_dir}/data/FLAME_masks.pkl', 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             self.masks = Struct(**ss)
 
-        with open(f'{dir}/../data/generic_model.pkl', 'rb') as f:
+        with open(f'{main_dir}/data/generic_model.pkl', 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             flame_model = Struct(**ss)
 
-        self.color_mesh = trimesh.load(f'{dir}/../data/head_template_color.obj', process=False)
+        self.color_mesh = trimesh.load(f'{main_dir}/data/head_template_color.obj', process=False)
         self.color_mask = (np.array(self.color_mesh.visual.vertex_colors[:, 0:3]) == [255, 0, 0])[:, 0].nonzero()[0]
         self.color_mask = np.array([i for i in self.color_mask if i not in self.get_mask_eyes()])
 
