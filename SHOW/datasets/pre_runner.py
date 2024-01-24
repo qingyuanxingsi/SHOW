@@ -61,6 +61,7 @@ def run_pymafx(
     log_cmds=True,
     no_render=True,
 ):
+    main_dir = os.environ['main_dir']
     with path_enter(pymaf_code_dir):
         cmds=[
             'python apps/demo_smplx.py',
@@ -74,7 +75,7 @@ def run_pymafx(
             cmds+=['--no_render']
             
         cmds+=[
-            '--pretrained_model data/pretrained_model/PyMAF-X_model_checkpoint.pt',
+            f'--pretrained_model {main_dir}/models/pymaf_data/pretrained_model/PyMAF-X_model_checkpoint.pt',
             '--misc TRAIN.BHF_MODE full_body MODEL.EVAL_MODE True MODEL.PyMAF.HAND_VIS_TH 0.1'
         ]
         

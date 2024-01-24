@@ -1,6 +1,7 @@
 
 ffmpeg_path = '/usr/bin/ffmpeg'
 openpose_root_path = '/openpose'
+# openpose_root_path = '/mllab/codehub/openpose'
 openpose_bin_path = 'build/examples/openpose/openpose.bin'
 
 video_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'

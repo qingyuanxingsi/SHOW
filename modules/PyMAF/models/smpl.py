@@ -29,6 +29,7 @@ from utils import pose_tracker
 
 SMPL_MEAN_PARAMS = path_config.SMPL_MEAN_PARAMS
 SMPL_MODEL_DIR = path_config.SMPL_MODEL_DIR
+PYMAF_DATA_DIR = path_config.PYMAF_DATA_DIR
 
 @dataclass
 class ModelOutput(SMPLXOutput):
@@ -685,7 +686,7 @@ def get_partial_smpl(body_model='smpl', device=torch.device('cuda')):
     part_vert_faces = {}
 
     for part in ['lhand', 'rhand', 'face', 'arm', 'forearm', 'larm', 'rarm', 'lwrist', 'rwrist']:
-        part_vid_fname = 'data/partial_mesh/{}_{}_vids.npz'.format(body_model, part)
+        part_vid_fname = f'{PYMAF_DATA_DIR}/partial_mesh/{body_model}_{part}_vids.npz'
         if os.path.exists(part_vid_fname):
             part_vids = np.load(part_vid_fname)
             part_vert_faces[part] = {'vids': part_vids['vids'], 'faces': part_vids['faces']}

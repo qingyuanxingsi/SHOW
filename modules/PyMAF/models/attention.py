@@ -300,7 +300,7 @@ def get_att_block(img_feature_dim=2048, output_feat_dim=512, hidden_feat_dim=102
 
     config_class = BertConfig
     # config = config_class.from_pretrained('models/transformers/bert/bert-base-uncased/')
-    config = config_class.from_pretrained('bert-base-uncased')
+    config = config_class.from_pretrained('/mnt/cephfs/doodleliang/model_hub/bert-base-uncased')
 
     interm_size_scale = 2
 

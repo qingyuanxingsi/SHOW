@@ -26,6 +26,7 @@ from utils.iuvmap import iuv_img2map, iuv_map2img, seg_img2map
 from .smpl import get_smpl_tpose
 from utils.imutils import j2d_processing
 
+main_dir = os.environ['main_dir']
 
 class TransformerDecoderUnit(nn.Module):
     def __init__(self, feat_dim, attri_dim=0, n_head=8, pos_en_flag=True, attn_type='softmax', P=None):
@@ -81,14 +82,14 @@ class Mesh_Sampler(nn.Module):
         # downsample SMPL mesh and assign part labels
         if type == 'smpl':
             # from https://github.com/nkolot/GraphCMR/blob/master/data/mesh_downsampling.npz
-            smpl_mesh_graph = np.load('data/smpl_downsampling.npz', allow_pickle=True, encoding='latin1')
+            smpl_mesh_graph = np.load(f'{main_dir}/models/pymaf_data/smpl_downsampling.npz', allow_pickle=True, encoding='latin1')
 
             A = smpl_mesh_graph['A']
             U = smpl_mesh_graph['U']
             D = smpl_mesh_graph['D'] # shape: (2,)
         elif type == 'mano':
             # from https://github.com/microsoft/MeshGraphormer/blob/main/src/modeling/data/mano_downsampling.npz
-            mano_mesh_graph = np.load('data/mano_downsampling.npz', allow_pickle=True, encoding='latin1')
+            mano_mesh_graph = np.load(f'{main_dir}/models/pymaf_data/mano_downsampling.npz', allow_pickle=True, encoding='latin1')
 
             A = mano_mesh_graph['A']
             U = mano_mesh_graph['U']
@@ -174,7 +175,7 @@ class MAF_Extractor(nn.Module):
 
         # downsample SMPL mesh and assign part labels
         # from https://github.com/nkolot/GraphCMR/blob/master/data/mesh_downsampling.npz
-        smpl_mesh_graph = np.load('data/smpl_downsampling.npz', allow_pickle=True, encoding='latin1')
+        smpl_mesh_graph = np.load(f'{main_dir}/models/pymaf_data/smpl_downsampling.npz', allow_pickle=True, encoding='latin1')
 
         A = smpl_mesh_graph['A']
         U = smpl_mesh_graph['U']

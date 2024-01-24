@@ -44,11 +44,12 @@ class api_MICA(object):
         self.load_checkpoint(self.mica,model_path=cfg.pretrained_model_path)
         self.mica.eval()
 
-        self.app = FaceAnalysis(name='antelopev2', 
-                                providers=['CPUExecutionProvider'],
-                                root=f'{SHOW_MAIN_DIR}/insightface'
-                                # providers=['CUDAExecutionProvider']
-                                )
+        self.app = FaceAnalysis(
+            name='antelopev2', 
+            providers=['CPUExecutionProvider'],
+            root=f'{SHOW_MAIN_DIR}/insightface'
+            # providers=['CUDAExecutionProvider']
+        )
         self.app.prepare(ctx_id=0, det_size=(224, 224))
         logger.info('MICA api init done.')
 
